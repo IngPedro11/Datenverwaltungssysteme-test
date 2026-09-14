@@ -1,0 +1,40 @@
+﻿
+project:
+  type: website
+
+website:
+  title: "Mi Wiki"
+  description: "Apuntes y ejercicios resueltos"
+
+  navbar:
+    title: "Mi Wiki"
+    left:
+      - href: index.qmd
+        text: Inicio
+
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Teoría"
+        contents:
+          - teoria/introduccion.qmd
+          - teoria/conceptos.qmd
+
+      - section: "Ejercicios"
+        contents:
+          - uebungen\uebung-01.qmd
+          - uebungen\uebung-02.qmd
+          - uebungen\uebung-03.qmd
+
+format:
+  html:
+    theme: superhero
+    css: styles.css
+    toc: true
+    number-sections: false
+    code-copy: true
+    smooth-scroll: true
+
+execute:
+  freeze: auto

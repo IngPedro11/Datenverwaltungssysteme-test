@@ -1,0 +1,44 @@
+﻿---
+title: "Mi Wiki"
+---
+
+# Bienvenido 👋
+
+Bienvenido a mi wiki personal.
+
+Aquí puedo guardar:
+
+- 📚 Teoría
+- ✏️ Ejercicios resueltos
+- 🖼️ Imágenes
+- 📊 Diagramas
+- 💻 Código
+- 📐 Fórmulas
+- 📝 Apuntes
+
+---
+
+## 📚 Teoría
+
+Consulta los conceptos y explicaciones.
+
+[Ir a Introducción](teoria/introduccion.qmd)
+
+[Ir a Conceptos básicos](teoria/conceptos.qmd)
+
+---
+
+## ✏️ Ejercicios
+
+Ejercicios resueltos paso a paso.
+
+- [Übung 1](uebungen/uebung-01.qmd)
+
+---
+
+::: {.callout-tip}
+## Consejo
+
+Puedes utilizar esta wiki para guardar tus apuntes y soluciones
+y consultarlos posteriormente desde cualquier navegador.
+:::
