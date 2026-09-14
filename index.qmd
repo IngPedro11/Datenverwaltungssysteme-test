@@ -1,44 +1,46 @@
 ﻿---
-title: "Mi Wiki"
+title: "Meine Wiki"
 ---
 
-# Bienvenido 👋
+# Willkommen 👋
 
-Bienvenido a mi wiki personal.
+Willkommen in meinem persönlichen Wiki.
 
-Aquí puedo guardar:
+Hier kann ich Folgendes speichern:
 
-- 📚 Teoría
-- ✏️ Ejercicios resueltos
-- 🖼️ Imágenes
-- 📊 Diagramas
-- 💻 Código
-- 📐 Fórmulas
-- 📝 Apuntes
-
----
-
-## 📚 Teoría
-
-Consulta los conceptos y explicaciones.
-
-[Zur Gliederung](theory\introduction.qmd)
-
-[Grundlegende Konzepte](theory\Konzpte.qmd)
+- 📚 Theorie
+- ✏️ Gelöste Übungen
+- 🖼️ Bilder
+- 📊 Diagramme
+- 💻 Code
+- 📐 Formeln
+- 📝 Notizen
 
 ---
 
-## ✏️ Ejercicios
+## 📚 Theorie
 
-Ejercicios resueltos paso a paso.
+Hier findest du Konzepte und Erklärungen.
+
+[Zur Gliederung](theory/introduction.qmd)
+
+[Grundlegende Konzepte](theory/Konzpte.qmd)
+
+---
+
+## ✏️ Übungen
+
+Schritt-für-Schritt gelöste Übungen.
 
 - [Übung 1](uebungen/uebung-01.qmd)
 
 ---
 
 ::: {.callout-tip}
-## Consejo
 
-Puedes utilizar esta wiki para guardar tus apuntes y soluciones
-y consultarlos posteriormente desde cualquier navegador.
+## 💡 Tipp
+
+Du kannst dieses Wiki verwenden, um deine Notizen und Lösungen zu speichern
+und sie später über jeden Browser abzurufen.
+
 :::

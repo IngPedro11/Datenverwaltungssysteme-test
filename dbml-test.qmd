@@ -1,0 +1,24 @@
+---
+title: "Prueba de diagramas"
+---
+
+# Base de datos
+
+## Mermaid
+
+```{mermaid}
+erDiagram
+    users ||--o{ orders : "has"
+
+    users {
+        int id PK
+        varchar name
+        varchar email
+    }
+
+    orders {
+        int id PK
+        int user_id FK
+        datetime created_at
+    }
+```

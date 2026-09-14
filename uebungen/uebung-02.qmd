@@ -9,7 +9,7 @@
 
 3. Kennzeichnen Sie Primärschlüssel (PK) und Fremdschlüssel (FK).
 
-![ERD-Diagram](../imagenes/2-ERD-Diagram.png)
+![ERD-Diagram](../img/2-ERD-Diagram.png)
 
 ---
 

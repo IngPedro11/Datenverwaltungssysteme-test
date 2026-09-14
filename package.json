@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@softwaretechnik/dbml-renderer": "^1.0.31"
+  }
+}
