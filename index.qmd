@@ -22,9 +22,9 @@ Aquí puedo guardar:
 
 Consulta los conceptos y explicaciones.
 
-[Ir a Introducción](teoria/introduccion.qmd)
+[Zur Gliederung](theory\introduction.qmd)
 
-[Ir a Conceptos básicos](teoria/conceptos.qmd)
+[Grundlegende Konzepte](theory\Konzpte.qmd)
 
 ---
 
