@@ -1,0 +1,13 @@
+Table users {
+  id int [pk]
+  name varchar
+  email varchar
+}
+
+Table orders {
+  id int [pk]
+  user_id int
+  created_at datetime
+}
+
+Ref: orders.user_id > users.id
