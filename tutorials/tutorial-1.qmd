@@ -29,20 +29,55 @@ Das übergeordnete Ziel des Projekts besteht darin, eine technische Grundlage zu
 
 ### CityMove
 
-- Modell(<u>id</u>, hersteller, bezeichnung, fahrzeugtyp, baujahr)
-- Fahrzeuge(<u>id</u>, id_modell ↑)
+- **Modell**(<u>id</u>, hersteller, bezeichnung, fahrzeugtyp, baujahr)
+- **Fahrzeug**(<u>id</u>, id_modell ↑, fahrzeugnummer, kapazitaet, antriebsart, inbetriebnahme, status)
+- **Linie**(<u>id</u>, liniennummer, bezeichnung, verkehrsmittel, gueltig_ab, gueltig_bis)
+- **Haltestelle**(<u>id</u>, name, stadtteil, latitude, longitude)
+- **Linien_Haltestelle**(<u>id</u>, id_linie ↑, id_haltestelle ↑, reihenfolge, fahrtrichtung)
+- Fahrt(<u>id</u>, id_linie ↑, id_fahrzeug ↑, datum, fahrtrichtung, fahrten_status)
+- **Fahrplan**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, ankunft_geplant, abfahrt_geplant)
+- Fahrt_Haltestelle**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, ankunft_tatsaechlich, abfahrt_tatsaechlich)
+- **Fahrgastaufkommen**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, einsteiger, aussteiger)
+- **Stoerung**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, typ, beginn, ende, dauer_min, beschreibung)
 
 ![](../img/city_move.png){width="90%"}
 
 ### BikeShare
 
+- **Fahrradmodell**(<u>id</u>, hersteller, bezeichnung, fahrradtyp, baujahr)
+- **Fahrrad**(<u>id</u>, id_modell ↑, inventarnummer, anschaffungsdatum, status)
+- **Station**(<u>id</u>, name, stadtteil, latitude, longitude, kapazitaet)
+- **Kunde**(<u>id</u>, registrierungsdatum, kundentyp)
+- **Tarif**(<u>id</u>, bezeichnung, grundgebuehr, preis_pro_minute, gueltig_ab, gueltig_bis)
+- **Fahrt**(<u>id</u>, id_kunde ↑, id_fahrrad ↑, id_startstation ↑, id_zielstation ↑, id_tarif ↑, startzeit, endzeit, fahrtdauer_min, status)
+- **Zahlung**(<u>id</u>, id_fahrt ↑, zahlungszeitpunkt, betrag, zahlungsart, status)
+- **Wartung**(<u>id</u>, id_fahrrad ↑, beginn, ende, wartungsart, kosten, beschreibung)
+
 ![](../img/bike_share.png){width="90%"}
 
 ### CityEvents
 
+- **Veranstaltung**(<u>id</u>, name, id_typ ↑, id_veranstalter ↑, beschreibung)
+- **Veranstaltungstyp**(<u>id</u>, bezeichnung)
+- Veranstalter(<u>id</u>, name, organisationstyp)
+- **Veranstaltungsort**(<u>id</u>, name, stadtteil, adresse, latitude, longitude, kapazitaet)
+- **Veranstaltungstermin**(<u>id</u>, id_veranstaltung ↑, id_veranstaltungsort ↑, beginn_geplant, ende_geplant, beginn_tatsaechlich, ende_tatsaechlich, status)
+- **Besucher**(<u>id</u>, kundentyp, registrierungsdatum)
+- **Ticket**(<u>id</u>, id_termin ↑, id_besucher ↑, tickettyp, preis, kaufzeitpunkt, status)
+- **Einlass**(<u>id</u>, id_ticket ↑, einlasszeitpunkt, einlass_status)
+- **Stoerung**(<u>id</u>, id_termin ↑, typ, beginn, ende, beschreibung)
+
+
 ![](../img/city_events.png){width="90%"}
 
 ### AirSense
+
+
+- **Station**(<u>id</u>, name, stadtteil, latitude, longitude, stations_typ, installationsdatum, status)
+- **Sensor**(<u>id</u>, id_station ↑, sensortyp, hersteller, modell, einheit, installationsdatum, status)
+- **Messung**(<u>id</u>, id_sensor ↑, messzeitpunkt, messwert, qualitaetsstatus)
+- **Sensorwartung**(<u>id</u>, id_sensor ↑, beginn, ende, wartungsart, kosten, beschreibung)
+
 
 ![](../img/weather_air.png){width="90%"}
 
