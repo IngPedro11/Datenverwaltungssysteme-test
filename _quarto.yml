@@ -3,25 +3,25 @@ project:
   type: website
 
 website:
-  title: "Mi Wiki"
-  description: "Apuntes y ejercicios resueltos"
+  title: "Mein Wiki"
+  description: "Wiki für DVS"
 
   navbar:
-    title: "Mi Wiki"
+    title: "Mein Wiki"
     left:
       - href: index.qmd
-        text: Inicio
+        text: Start
 
   sidebar:
     style: "docked"
     search: true
     contents:
-      - section: "Teoría"
+      - section: "Tutorials"
         contents:
-          - teoria/introduccion.qmd
-          - teoria/conceptos.qmd
+          - tutorials\tutorial-1.qmd
+          - tutorials\tutorial-2.qmd
 
-      - section: "Ejercicios"
+      - section: "Übungen"
         contents:
           - uebungen\uebung-01.qmd
           - uebungen\uebung-02.qmd

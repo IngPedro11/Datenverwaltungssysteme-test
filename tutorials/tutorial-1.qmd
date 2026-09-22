@@ -1,0 +1,40 @@
+﻿---
+title: "Tutorial 1"
+---
+
+
+Hier fängt das Tutorial 1
+
+
+## Theory
+
+Erklärungen.
+
+Beispiele:
+
+> Udatenbanken 
+> Datenwarehouse.
+
+
+![Beispiel](../img\2-ERD-Diagram.png)
+
+
+### Data Warehouse
+
+was ist das 
+
+
+
+::: {.callout-note}
+### Note
+
+Mit dieser Info können Sie schon die Aufgabe 1 Lösen, versuchen Sie 
+:::
+
+### ✏️ Übungen
+
+Schritt-für-Schritt gelöste Übungen.
+
+- [Übung 1](uebungen/uebung-01.qmd)
+
+

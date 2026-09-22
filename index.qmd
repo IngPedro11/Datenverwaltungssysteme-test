@@ -3,7 +3,7 @@ title: "Meine Wiki"
 ---
 
 # Willkommen 👋
-
+<!--
 Willkommen in meinem persönlichen Wiki.
 
 Hier kann ich Folgendes speichern:
@@ -15,24 +15,20 @@ Hier kann ich Folgendes speichern:
 - 💻 Code
 - 📐 Formeln
 - 📝 Notizen
+-->
 
 ---
 
-## 📚 Theorie
+## 📚 Tutorials
 
-Hier findest du Konzepte und Erklärungen.
+Hier findest du die Tutorials.
 
-[Zur Gliederung](theory/introduction.qmd)
 
-[Grundlegende Konzepte](theory/Konzpte.qmd)
+### [Tutorial 1: Einführung in die Datenbankmodellierung](tutorials/tutorial-1.qmd)
 
----
 
-## ✏️ Übungen
+### [Tutorial 2: Grundlegende Konzepte der Datenbankmodellierung](tutorials/tutorial-2.qmd)
 
-Schritt-für-Schritt gelöste Übungen.
-
-- [Übung 1](uebungen/uebung-01.qmd)
 
 ---
 
