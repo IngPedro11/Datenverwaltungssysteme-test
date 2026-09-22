@@ -1,0 +1,39 @@
+Table Station {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  latitude decimal
+  longitude decimal
+  stations_typ varchar(30)
+  installationsdatum date
+  status varchar(20)
+}
+
+Table Sensor {
+  id int [pk]
+  id_station int [ref: > Station.id]
+  sensortyp varchar(50)
+  hersteller varchar(50)
+  modell varchar(50)
+  einheit varchar(20)
+  installationsdatum date
+  status varchar(20)
+}
+
+Table Messung {
+  id bigint [pk]
+  id_sensor int [ref: > Sensor.id]
+  messzeitpunkt timestamp
+  messwert decimal
+  qualitaetsstatus varchar(20)
+}
+
+Table Sensorwartung {
+  id int [pk]
+  id_sensor int [ref: > Sensor.id]
+  beginn timestamp
+  ende timestamp
+  wartungsart varchar(50)
+  kosten decimal
+  beschreibung varchar(255)
+}

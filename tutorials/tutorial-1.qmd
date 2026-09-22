@@ -3,38 +3,180 @@ title: "Tutorial 1"
 ---
 
 
-Hier fängt das Tutorial 1
+![Nahverkehr](../img/city_move.png){width="90%"}
+
+![Fahrradverleih](../img/bike_share.png){width="90%"}
+
+![Events](../img/city_events.png){width="90%"}
+
+![](../img/weather_air.png){width="90%"}
 
 
-## Theory
+## Fragestellungen für die Datenanalyse
 
-Erklärungen.
+Auf Basis der Daten aus den verschiedenen Quellsystemen sollen mithilfe des Data Warehouse unterschiedliche Fragestellungen im Bereich einer Smart City analysiert werden.
 
-Beispiele:
+### Fragestellung 1 – Wetter und Fahrradnutzung
 
-> Udatenbanken 
-> Datenwarehouse.
+> Wie beeinflussen Wetterbedingungen die Nutzung des Fahrradverleihsystems?
 
+Für diese Analyse werden Daten aus dem Quellsystem **BikeShare** mit den Wetter- und Umweltdaten aus **AirSense** kombiniert. Dabei können beispielsweise die Anzahl der Fahrradfahrten und die durchschnittliche Fahrtdauer in Abhängigkeit von Temperatur, Niederschlag oder Wind untersucht werden.
 
-![Beispiel](../img\2-ERD-Diagram.png)
+**Verwendete Quellsysteme:**
+- BikeShare
+- AirSense
 
+**Mögliche Kennzahlen:**
+- Anzahl der Fahrradfahrten
+- durchschnittliche Fahrtdauer
+- durchschnittliche Anzahl der Fahrten pro Station
+- Temperatur
+- Niederschlagsmenge
 
-### Data Warehouse
+**Mögliche Analysedimensionen:**
+- Zeit
+- Ort
+- Wetter
 
-was ist das 
+---
 
+### Fragestellung 2 – Veranstaltungen und ÖPNV
 
+> Wie verändert sich das Fahrgastaufkommen des öffentlichen Nahverkehrs während bzw. im  Umfeld von Veranstaltungen?
 
-::: {.callout-note}
-### Note
+Hierfür werden die Daten aus **CityMove** und **CityEvents** miteinander verknüpft.
+Dadurch kann untersucht werden, ob und wie sich Veranstaltungen auf das
+Fahrgastaufkommen an nahegelegenen Haltestellen auswirken.
 
-Mit dieser Info können Sie schon die Aufgabe 1 Lösen, versuchen Sie 
-:::
+**Verwendete Quellsysteme:**
+- CityMove
+- CityEvents
 
-### ✏️ Übungen
+**Mögliche Kennzahlen:**
+- Anzahl der Einsteiger
+- Anzahl der Aussteiger
+- gesamtes Fahrgastaufkommen
+- Verspätung in Minuten
+- Anzahl der Besucher
 
-Schritt-für-Schritt gelöste Übungen.
+**Mögliche Analysedimensionen:**
+- Zeit
+- Ort
+- Linie
+- Veranstaltung
 
-- [Übung 1](uebungen/uebung-01.qmd)
+---
 
+### Fragestellung 3 – Veranstaltungen und Fahrradnutzung
 
+> Wie beeinflussen Veranstaltungen die Nutzung von Fahrradverleihstationen in deren
+Umgebung?
+
+Für diese Analyse werden Veranstaltungsdaten aus **CityEvents** mit den
+Fahrradfahrten aus **BikeShare** kombiniert. Dabei kann beispielsweise untersucht
+werden, ob sich die Anzahl der Fahrradfahrten während größerer Veranstaltungen
+verändert.
+
+**Verwendete Quellsysteme:**
+- CityEvents
+- BikeShare
+
+**Mögliche Kennzahlen:**
+- Anzahl der Fahrradfahrten
+- durchschnittliche Fahrtdauer
+- Anzahl der Besucher
+- Stationsauslastung
+
+**Mögliche Analysedimensionen:**
+- Zeit
+- Ort
+- Veranstaltung
+- Fahrrad
+
+---
+
+### Fragestellung 4 – Wetter und ÖPNV
+
+> Welchen Zusammenhang gibt es zwischen den Wetterbedingungen und dem Fahrgastaufkommen
+im öffentlichen Nahverkehr?
+
+Dazu werden die Fahrgastdaten aus **CityMove** mit den Wetterdaten aus **AirSense**
+verbunden. Dadurch kann das Fahrgastaufkommen beispielsweise bei unterschiedlichen
+Temperaturen oder Niederschlagsmengen untersucht werden.
+
+**Verwendete Quellsysteme:**
+- CityMove
+- AirSense
+
+**Mögliche Kennzahlen:**
+- Anzahl der Einsteiger
+- Anzahl der Aussteiger
+- gesamtes Fahrgastaufkommen
+- durchschnittliche Verspätung
+- Temperatur
+- Niederschlagsmenge
+
+**Mögliche Analysedimensionen:**
+- Zeit
+- Ort
+- Wetter
+- Linie
+
+---
+
+### Fragestellung 5 – Veranstaltungen und Verkehrsaufkommen
+
+> Wie verändert sich das Mobilitätsaufkommen in einem Stadtgebiet bei Veranstaltungen
+unterschiedlicher Größe?
+
+Für diese Fragestellung werden die Daten aus **CityEvents**, **CityMove** und
+**BikeShare** gemeinsam ausgewertet. Dadurch kann das Mobilitätsaufkommen rund um
+Veranstaltungsorte anhand verschiedener Verkehrsmittel betrachtet werden.
+
+**Verwendete Quellsysteme:**
+- CityEvents
+- CityMove
+- BikeShare
+
+**Mögliche Kennzahlen:**
+- Anzahl der ÖPNV-Fahrgäste
+- Anzahl der Fahrradfahrten
+- Anzahl der Besucher
+- durchschnittliche Fahrtdauer
+- Stationsauslastung
+
+**Mögliche Analysedimensionen:**
+- Zeit
+- Ort
+- Veranstaltung
+- Linie
+- Station
+
+---
+
+### Fragestellung 6 – Luftqualität und Mobilitätsaufkommen
+
+> Gibt es einen Zusammenhang zwischen dem Mobilitätsaufkommen und der gemessenen
+Luftqualität in verschiedenen Stadtgebieten?
+
+Hierfür werden die Mobilitätsdaten aus **CityMove** und **BikeShare** mit den
+Umweltmessungen aus **AirSense** kombiniert. Dadurch können beispielsweise
+Unterschiede der Luftqualität in Abhängigkeit vom Mobilitätsaufkommen und vom
+Stadtgebiet untersucht werden.
+
+**Verwendete Quellsysteme:**
+- AirSense
+- CityMove
+- BikeShare
+
+**Mögliche Kennzahlen:**
+- Anzahl der ÖPNV-Fahrten bzw. Fahrgäste
+- Anzahl der Fahrradfahrten
+- PM10-Konzentration
+- PM2.5-Konzentration
+- NO₂-Konzentration
+
+**Mögliche Analysedimensionen:**
+- Zeit
+- Ort
+- Verkehrsmittel

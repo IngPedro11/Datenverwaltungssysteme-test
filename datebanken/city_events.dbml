@@ -1,0 +1,71 @@
+Table Veranstaltung {
+  id int [pk]
+  name varchar(100)
+  id_typ int [ref: > Veranstaltungstyp.id]
+  id_veranstalter int [ref: > Veranstalter.id]
+  beschreibung varchar(255)
+}
+
+Table Veranstaltungstyp {
+  id int [pk]
+  bezeichnung varchar(50)
+}
+
+Table Veranstalter {
+  id int [pk]
+  name varchar(100)
+  organisationstyp varchar(50)
+}
+
+Table Veranstaltungsort {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  adresse varchar(150)
+  latitude decimal
+  longitude decimal
+  kapazitaet int
+}
+
+Table Veranstaltungstermin {
+  id int [pk]
+  id_veranstaltung int [ref: > Veranstaltung.id]
+  id_veranstaltungsort int [ref: > Veranstaltungsort.id]
+  beginn_geplant timestamp
+  ende_geplant timestamp
+  beginn_tatsaechlich timestamp
+  ende_tatsaechlich timestamp
+  status varchar(30)
+}
+
+Table Besucher {
+  id int [pk]
+  kundentyp varchar(30)
+  registrierungsdatum date
+}
+
+Table Ticket {
+  id int [pk]
+  id_termin int [ref: > Veranstaltungstermin.id]
+  id_besucher int [ref: > Besucher.id]
+  tickettyp varchar(30)
+  preis decimal
+  kaufzeitpunkt timestamp
+  status varchar(20)
+}
+
+Table Einlass {
+  id int [pk]
+  id_ticket int [ref: > Ticket.id]
+  einlasszeitpunkt timestamp
+  einlass_status varchar(20)
+}
+
+Table Stoerung {
+  id int [pk]
+  id_termin int [ref: > Veranstaltungstermin.id]
+  typ varchar(50)
+  beginn timestamp
+  ende timestamp
+  beschreibung varchar(255)
+}

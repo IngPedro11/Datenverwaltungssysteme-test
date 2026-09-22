@@ -1,0 +1,86 @@
+Table Modell {
+  id int [pk]
+  hersteller varchar(50)
+  bezeichnung varchar(50)
+  fahrzeugtyp varchar(30)
+  baujahr int
+}
+
+Table Fahrzeug {
+  id int [pk]
+  id_modell int [ref: > Modell.id]
+  fahrzeugnummer varchar(20)
+  kapazitaet int
+  antriebsart varchar(30)
+  inbetriebnahme date
+  status varchar(20)
+}
+
+Table Linie {
+  id int [pk]
+  liniennummer varchar(10)
+  bezeichnung varchar(100)
+  verkehrsmittel varchar(20)
+  gueltig_ab date
+  gueltig_bis date
+}
+
+Table Haltestelle {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  latitude decimal
+  longitude decimal
+}
+
+Table Linien_Haltestelle {
+  id int [pk]
+  id_linie int [ref: > Linie.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  reihenfolge int
+  fahrtrichtung varchar(50)
+}
+
+Table Fahrt {
+  id int [pk]
+  id_linie int [ref: > Linie.id]
+  id_fahrzeug int [ref: > Fahrzeug.id]
+  datum date
+  fahrtrichtung varchar(50)
+  fahrten_status varchar(20)
+}
+
+Table Fahrplan {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  ankunft_geplant timestamp
+  abfahrt_geplant timestamp
+}
+
+Table Fahrt_Haltestelle {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  ankunft_tatsaechlich timestamp
+  abfahrt_tatsaechlich timestamp
+}
+
+Table Fahrgastaufkommen {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  einsteiger int
+  aussteiger int
+}
+
+Table Stoerung {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  typ varchar(50)
+  beginn timestamp
+  ende timestamp
+  dauer_min int
+  beschreibung varchar(255)
+}

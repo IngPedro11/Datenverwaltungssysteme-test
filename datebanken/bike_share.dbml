@@ -1,0 +1,71 @@
+Table Fahrradmodell {
+  id int [pk]
+  hersteller varchar(50)
+  bezeichnung varchar(50)
+  fahrradtyp varchar(30)
+  baujahr int
+}
+
+Table Fahrrad {
+  id int [pk]
+  id_modell int [ref: > Fahrradmodell.id]
+  inventarnummer varchar(30)
+  anschaffungsdatum date
+  status varchar(20)
+}
+
+Table Station {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  latitude decimal
+  longitude decimal
+  kapazitaet int
+}
+
+Table Kunde {
+  id int [pk]
+  registrierungsdatum date
+  kundentyp varchar(30)
+}
+
+Table Tarif {
+  id int [pk]
+  bezeichnung varchar(50)
+  grundgebuehr decimal
+  preis_pro_minute decimal
+  gueltig_ab date
+  gueltig_bis date
+}
+
+Table Fahrt {
+  id int [pk]
+  id_kunde int [ref: > Kunde.id]
+  id_fahrrad int [ref: > Fahrrad.id]
+  id_startstation int [ref: > Station.id]
+  id_zielstation int [ref: > Station.id]
+  id_tarif int [ref: > Tarif.id]
+  startzeit timestamp
+  endzeit timestamp
+  fahrtdauer_min int
+  status varchar(20)
+}
+
+Table Zahlung {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  zahlungszeitpunkt timestamp
+  betrag decimal
+  zahlungsart varchar(30)
+  status varchar(20)
+}
+
+Table Wartung {
+  id int [pk]
+  id_fahrrad int [ref: > Fahrrad.id]
+  beginn timestamp
+  ende timestamp
+  wartungsart varchar(50)
+  kosten decimal
+  beschreibung varchar(255)
+}
