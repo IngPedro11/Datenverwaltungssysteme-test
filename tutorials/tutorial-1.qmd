@@ -29,22 +29,330 @@ Das übergeordnete Ziel des Projekts besteht darin, eine technische Grundlage zu
 
 ### CityMove
 
-- Modell(<u>id</u>, hersteller, bezeichnung, fahrzeugtyp, baujahr)
-- Fahrzeuge(<u>id</u>, id_modell ↑)
+- **Modell**(<u>id</u>, hersteller, bezeichnung, fahrzeugtyp, baujahr)
+- **Fahrzeug**(<u>id</u>, id_modell ↑, fahrzeugnummer, kapazitaet, antriebsart, inbetriebnahme, status)
+- **Linie**(<u>id</u>, liniennummer, bezeichnung, verkehrsmittel, gueltig_ab, gueltig_bis)
+- **Haltestelle**(<u>id</u>, name, stadtteil, latitude, longitude)
+- **Linien_Haltestelle**(<u>id</u>, id_linie ↑, id_haltestelle ↑, reihenfolge, fahrtrichtung)
+- Fahrt(<u>id</u>, id_linie ↑, id_fahrzeug ↑, datum, fahrtrichtung, fahrten_status)
+- **Fahrplan**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, ankunft_geplant, abfahrt_geplant)
+- Fahrt_Haltestelle**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, ankunft_tatsaechlich, abfahrt_tatsaechlich)
+- **Fahrgastaufkommen**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, einsteiger, aussteiger)
+- **Stoerung**(<u>id</u>, id_fahrt ↑, id_haltestelle ↑, typ, beginn, ende, dauer_min, beschreibung)
 
-![](../img/city_move.png){width="90%"}
+```dbml
+Table Modell {
+  id int [pk]
+  hersteller varchar(50)
+  bezeichnung varchar(50)
+  fahrzeugtyp varchar(30)
+  baujahr int
+}
+
+Table Fahrzeug {
+  id int [pk]
+  id_modell int [ref: > Modell.id]
+  fahrzeugnummer varchar(20)
+  kapazitaet int
+  antriebsart varchar(30)
+  inbetriebnahme date
+  status varchar(20)
+}
+
+Table Linie {
+  id int [pk]
+  liniennummer varchar(10)
+  bezeichnung varchar(100)
+  verkehrsmittel varchar(20)
+  gueltig_ab date
+  gueltig_bis date
+}
+
+Table Haltestelle {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  latitude decimal
+  longitude decimal
+}
+
+Table Linien_Haltestelle {
+  id int [pk]
+  id_linie int [ref: > Linie.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  reihenfolge int
+  fahrtrichtung varchar(50)
+}
+
+Table Fahrt {
+  id int [pk]
+  id_linie int [ref: > Linie.id]
+  id_fahrzeug int [ref: > Fahrzeug.id]
+  datum date
+  fahrtrichtung varchar(50)
+  fahrten_status varchar(20)
+}
+
+Table Fahrplan {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  ankunft_geplant timestamp
+  abfahrt_geplant timestamp
+}
+
+Table Fahrt_Haltestelle {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  ankunft_tatsaechlich timestamp
+  abfahrt_tatsaechlich timestamp
+}
+
+Table Fahrgastaufkommen {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  einsteiger int
+  aussteiger int
+}
+
+Table Stoerung {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  id_haltestelle int [ref: > Haltestelle.id]
+  typ varchar(50)
+  beginn timestamp
+  ende timestamp
+  dauer_min int
+  beschreibung varchar(255)
+}
+```
 
 ### BikeShare
 
-![](../img/bike_share.png){width="90%"}
+- **Fahrradmodell**(<u>id</u>, hersteller, bezeichnung, fahrradtyp, baujahr)
+- **Fahrrad**(<u>id</u>, id_modell ↑, inventarnummer, anschaffungsdatum, status)
+- **Station**(<u>id</u>, name, stadtteil, latitude, longitude, kapazitaet)
+- **Kunde**(<u>id</u>, registrierungsdatum, kundentyp)
+- **Tarif**(<u>id</u>, bezeichnung, grundgebuehr, preis_pro_minute, gueltig_ab, gueltig_bis)
+- **Fahrt**(<u>id</u>, id_kunde ↑, id_fahrrad ↑, id_startstation ↑, id_zielstation ↑, id_tarif ↑, startzeit, endzeit, fahrtdauer_min, status)
+- **Zahlung**(<u>id</u>, id_fahrt ↑, zahlungszeitpunkt, betrag, zahlungsart, status)
+- **Wartung**(<u>id</u>, id_fahrrad ↑, beginn, ende, wartungsart, kosten, beschreibung)
+
+```dbml
+Table Fahrradmodell {
+  id int [pk]
+  hersteller varchar(50)
+  bezeichnung varchar(50)
+  fahrradtyp varchar(30)
+  baujahr int
+}
+
+Table Fahrrad {
+  id int [pk]
+  id_modell int [ref: > Fahrradmodell.id]
+  inventarnummer varchar(30)
+  anschaffungsdatum date
+  status varchar(20)
+}
+
+Table Station {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  latitude decimal
+  longitude decimal
+  kapazitaet int
+}
+
+Table Kunde {
+  id int [pk]
+  registrierungsdatum date
+  kundentyp varchar(30)
+}
+
+Table Tarif {
+  id int [pk]
+  bezeichnung varchar(50)
+  grundgebuehr decimal
+  preis_pro_minute decimal
+  gueltig_ab date
+  gueltig_bis date
+}
+
+Table Fahrt {
+  id int [pk]
+  id_kunde int [ref: > Kunde.id]
+  id_fahrrad int [ref: > Fahrrad.id]
+  id_startstation int [ref: > Station.id]
+  id_zielstation int [ref: > Station.id]
+  id_tarif int [ref: > Tarif.id]
+  startzeit timestamp
+  endzeit timestamp
+  fahrtdauer_min int
+  status varchar(20)
+}
+
+Table Zahlung {
+  id int [pk]
+  id_fahrt int [ref: > Fahrt.id]
+  zahlungszeitpunkt timestamp
+  betrag decimal
+  zahlungsart varchar(30)
+  status varchar(20)
+}
+
+Table Wartung {
+  id int [pk]
+  id_fahrrad int [ref: > Fahrrad.id]
+  beginn timestamp
+  ende timestamp
+  wartungsart varchar(50)
+  kosten decimal
+  beschreibung varchar(255)
+}
+```
 
 ### CityEvents
 
-![](../img/city_events.png){width="90%"}
+- **Veranstaltung**(<u>id</u>, name, id_typ ↑, id_veranstalter ↑, beschreibung)
+- **Veranstaltungstyp**(<u>id</u>, bezeichnung)
+- Veranstalter(<u>id</u>, name, organisationstyp)
+- **Veranstaltungsort**(<u>id</u>, name, stadtteil, adresse, latitude, longitude, kapazitaet)
+- **Veranstaltungstermin**(<u>id</u>, id_veranstaltung ↑, id_veranstaltungsort ↑, beginn_geplant, ende_geplant, beginn_tatsaechlich, ende_tatsaechlich, status)
+- **Besucher**(<u>id</u>, kundentyp, registrierungsdatum)
+- **Ticket**(<u>id</u>, id_termin ↑, id_besucher ↑, tickettyp, preis, kaufzeitpunkt, status)
+- **Einlass**(<u>id</u>, id_ticket ↑, einlasszeitpunkt, einlass_status)
+- **Stoerung**(<u>id</u>, id_termin ↑, typ, beginn, ende, beschreibung)
+
+
+```dbml
+Table Veranstaltung {
+  id int [pk]
+  name varchar(100)
+  id_typ int [ref: > Veranstaltungstyp.id]
+  id_veranstalter int [ref: > Veranstalter.id]
+  beschreibung varchar(255)
+}
+
+Table Veranstaltungstyp {
+  id int [pk]
+  bezeichnung varchar(50)
+}
+
+Table Veranstalter {
+  id int [pk]
+  name varchar(100)
+  organisationstyp varchar(50)
+}
+
+Table Veranstaltungsort {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  adresse varchar(150)
+  latitude decimal
+  longitude decimal
+  kapazitaet int
+}
+
+Table Veranstaltungstermin {
+  id int [pk]
+  id_veranstaltung int [ref: > Veranstaltung.id]
+  id_veranstaltungsort int [ref: > Veranstaltungsort.id]
+  beginn_geplant timestamp
+  ende_geplant timestamp
+  beginn_tatsaechlich timestamp
+  ende_tatsaechlich timestamp
+  status varchar(30)
+}
+
+Table Besucher {
+  id int [pk]
+  kundentyp varchar(30)
+  registrierungsdatum date
+}
+
+Table Ticket {
+  id int [pk]
+  id_termin int [ref: > Veranstaltungstermin.id]
+  id_besucher int [ref: > Besucher.id]
+  tickettyp varchar(30)
+  preis decimal
+  kaufzeitpunkt timestamp
+  status varchar(20)
+}
+
+Table Einlass {
+  id int [pk]
+  id_ticket int [ref: > Ticket.id]
+  einlasszeitpunkt timestamp
+  einlass_status varchar(20)
+}
+
+Table Stoerung {
+  id int [pk]
+  id_termin int [ref: > Veranstaltungstermin.id]
+  typ varchar(50)
+  beginn timestamp
+  ende timestamp
+  beschreibung varchar(255)
+}
+```
 
 ### AirSense
 
-![](../img/weather_air.png){width="90%"}
+
+- **Station**(<u>id</u>, name, stadtteil, latitude, longitude, stations_typ, installationsdatum, status)
+- **Sensor**(<u>id</u>, id_station ↑, sensortyp, hersteller, modell, einheit, installationsdatum, status)
+- **Messung**(<u>id</u>, id_sensor ↑, messzeitpunkt, messwert, qualitaetsstatus)
+- **Sensorwartung**(<u>id</u>, id_sensor ↑, beginn, ende, wartungsart, kosten, beschreibung)
+
+
+```dbml
+
+Table Station {
+  id int [pk]
+  name varchar(100)
+  stadtteil varchar(100)
+  latitude decimal
+  longitude decimal
+  stations_typ varchar(30)
+  installationsdatum date
+  status varchar(20)
+}
+
+Table Sensor {
+  id int [pk]
+  id_station int [ref: > Station.id]
+  sensortyp varchar(50)
+  hersteller varchar(50)
+  modell varchar(50)
+  einheit varchar(20)
+  installationsdatum date
+  status varchar(20)
+}
+
+Table Messung {
+  id bigint [pk]
+  id_sensor int [ref: > Sensor.id]
+  messzeitpunkt timestamp
+  messwert decimal
+  qualitaetsstatus varchar(20)
+}
+
+Table Sensorwartung {
+  id int [pk]
+  id_sensor int [ref: > Sensor.id]
+  beginn timestamp
+  ende timestamp
+  wartungsart varchar(50)
+  kosten decimal
+  beschreibung varchar(255)
+}
+
+```
 
 
 ## Fragestellungen für die Datenanalyse
@@ -199,3 +507,4 @@ Hierfür werden die Mobilitätsdaten aus **CityMove** und **BikeShare** mit den 
 - Zeit
 - Ort
 - Verkehrsmittel
+

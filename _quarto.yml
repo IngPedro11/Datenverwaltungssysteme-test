@@ -21,16 +21,12 @@ website:
           - tutorials\tutorial-1.qmd
           - tutorials\tutorial-2.qmd
 
-      - section: "Übungen"
-        contents:
-          - uebungen\uebung-01.qmd
-          - uebungen\uebung-02.qmd
-          - uebungen\uebung-03.qmd
-
 format:
   html:
-    theme: superhero
+    theme: cosmo
     css: styles.css
+    include-after-body:
+      - dbml-visualizer.html
     toc: true
     number-sections: false
     code-copy: true
