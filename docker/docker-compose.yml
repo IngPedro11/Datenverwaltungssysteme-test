@@ -1,0 +1,80 @@
+services:
+
+  city_move:
+    build: ./city_move/sources
+    container_name: city_move
+    ports:
+      - "${CITYMOVE_DB_PORT}:5432"
+      - "${CITYMOVE_API_PORT}:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${CITYMOVE_DB}
+    volumes:
+      - ./city_move/data:/var/lib/postgresql
+    networks:
+      - smart-city-network
+
+  bikeshare:
+    build: ./bike_share/sources
+    container_name: bikeshare
+    ports:
+      - "${BIKESHARE_DB_PORT}:5432"
+      - "${BIKESHARE_API_PORT}:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${BIKESHARE_DB}
+    volumes:
+      - ./bike_share/data:/var/lib/postgresql
+    networks:
+      - smart-city-network
+
+  airsense:
+    build: ./airsense/sources
+    container_name: airsense
+    ports:
+      - "${AIRSENSE_DB_PORT}:5432"
+      - "${AIRSENSE_API_PORT}:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${AIRSENSE_DB}
+    volumes:
+      - ./airsense/data:/var/lib/postgresql
+    networks:
+      - smart-city-network
+
+  cityevents:
+    build: ./city_events/sources
+    container_name: cityevents
+    ports:
+      - "${CITYEVENTS_DB_PORT}:5432"
+      - "${CITYEVENTS_API_PORT}:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${CITYEVENTS_DB}
+    volumes:
+      - ./city_events/data:/var/lib/postgresql
+    networks:
+      - smart-city-network
+
+  dwh:
+    image: postgres:16
+    container_name: smart-city-dwh
+    ports:
+      - "${DWH_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${DWH_USER}
+      POSTGRES_PASSWORD: ${DWH_PASSWORD}
+      POSTGRES_DB: ${DWH_DB}
+    volumes:
+      - ./data/dwh:/var/lib/postgresql/data
+      - ./sql/dwh:/docker-entrypoint-initdb.d
+    networks:
+      - smart-city-network
+
+networks:
+  smart-city-network:
+    driver: bridge

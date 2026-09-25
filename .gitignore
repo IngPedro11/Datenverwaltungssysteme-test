@@ -3,3 +3,7 @@
 /_site/
 /node_modules/
 .vscode/
+/docker/airsense/data/
+/docker/bike_share/data/
+/docker/city_move/data/
+/docker/city_events/data/
